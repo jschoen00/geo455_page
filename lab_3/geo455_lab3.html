@@ -2,9 +2,99 @@
 <html>
     <head>
        <title>geo455_lab3</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <style type="text/css">
+#container {
+	height: relative;
+	width: relative;
+	margin-top: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+}
+#container #map {
+	background-color: #ffedf5;
+	height: 850px;
+    }
+#container #header {
+    font-size: 2em;
+    font-family: "Corbel", monospace;
+    letter-spacing: .04em;
+    padding: 10px 15px;
+    background-color: rgb(232, 193, 210);
+    border: 1px solid grey;
+    border-radius: 3px;
+    text-align: center;
+    }
+#container #leftMenu {
+	position: static;
+    background-color: #EEEEEE;
+	width: 300px;
+    top: 100px;
+    left: 50px;
+	float: left;
+	height: 830px;
+	margin: 0px;
+    font-size: 1em;
+    font-family: "Courier", monospace;
+    letter-spacing: .04em;
+    padding: 10px 15px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid grey;
+    border-radius: 5px;
+    z-index: 800;
+}
+#container #footer {
+    clear: both;
+	font-family: "Corbel", monospace;
+	font-size: 1em;
+    letter-spacing: .04em;
+	height: 25px;
+	background-color: rgb(232, 193, 210);
+    border: 1px solid grey;
+	text-align: center;
+	padding-top: 5px;
+	font-style: italic;
+}
+body {
+	background-color: #ffffff;
+}
+</style>
+
     </head>
-         <body bgcolor="#EDDD9E">
-       <h1 align="center">Lab 3</h1>
-       
+    <body>
+        <div id="container">
+            <div id="header">Lab 3</div>
+            <div id="leftMenu">
+                <p>These are some of my favorite places I have traveled to:</p>
+                    <ol type="1">
+                        <li>Grassy Narrows Lodge, Ontario, Canada</li>
+                        <li>St. Thomas and St. John, U.S. Virgin Islands</li>
+                        <li>Long Beach, California</li>
+                        <li>Paris, France</li>
+                        <li>Leiden, Netherlands</li>
+                    </ol>
+                <p> Here are places that I want to travel to in the future:</p>
+                    <ol>
+                        <li>Montr&#233;al, Quebec, Canada</li>
+                        <li>Lucerne</li>
+                        <li>Interlaken</li>
+                        <li>Jungfrau</li>
+                        <li>Zermatt</li>
+                </ol>
+                <p><img style="width: 275px; height: relative;" src="images/stjohn.jpg" alt="Sunset in the Virgin Islands">
+                </p>
+                <p><i><sup>Photo Credits: Jamie Schoen (2022)</sup></i></p>
+                <p><img style="width: 125px; height: relative;" src="images/netherlands.jpg" alt="Greenhouse in Leiden"> 
+                    <img style = "width: 125px; height: relative;" src="images/netherlands1.jpg" alt="Koi Pond in Leiden"</p>
+                <p><i><sup>Photo Credits: Jamie Schoen (2018)</sup></i></p>
+                </div>
+            <div id="map"></div>
+                <script src="map_lab3.js"></script>
+            <div id="footer">Map developed by Jamie Schoen</div>
+        </div>
      </body>
 </html>
