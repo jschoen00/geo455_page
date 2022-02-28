@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Event object</title>
+    </head>
+    <body>
+        <p id="position"></p>
+        <p id="text"></p>
+        
+        <script>
+            var page_coord = document.getElementById("position");
+            document.addEventListener("mousemove", function(e) {
+                page_coord.innerHTML = "Cursor is located at: " + e.pageX + " " + e.pageY;
+            });
+            
+            var page_coord1 = document.getElementById("text");
+                document.addEventListener("click", function(e) {
+                page_coord1.innerHTML = "Cursor was clicked at: " + e.pageX + " " + e.pageY;
+             });
+            
+        </script>
+    </body>
+</html>
