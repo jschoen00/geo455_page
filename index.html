@@ -2,43 +2,171 @@
 <html>
     
     <head>
-            <title>geo455_lab1</title>
+            <title>geo455_index</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>ESC/GEO 455 (SP22) DEMO</title>
         <meta name="description" content="An interactive getting started guide">
         <link rel="stylesheet" href="main.css">
-    </head>
-    <body bgcolor="#FFB6C1">
-      
-        <h1 align="center">Jamie Schoen (SP 22)</h1><!-- you can replace the heading to your name or something else that best represent your webpage-->
         
-        <h3><b>About me!</b></h3>
-        <p>
-            I am a junior at UWL majoring in Geography with a concentration in GIS and an Earth Science minor and I am from Paris, Wisconsin.
-            <img src="00jamie.jpg" width="100" height="100">
-        </p>
-        
-        <h3>Lab Assignments</h3>
-         <ol>
-             <li><a href="lab_1/geo455_lab1.html">Lab 1</a></li>
-             <li><a href="lab_2/geo455_lab2.html">Lab 2</a></li>
-             <li><a href="lab_3/geo455_lab3.html">Lab 3</a></li>
-             <li><a href="lab_4/geo455_lab4.html">Lab 4</a></li>
-             <li><a href="lab_5/geo455_lab5.html">Lab 5</a></li>
-             <li><a href="lab_6/geo455_lab6.html">Lab 6</a></li>
-             <li><a href="lab_7/geo455_lab7.html">Lab 7</a></li>
-             <li><a href="lab_8/geo455_lab8.html">Lab 8</a></li>
-             <li><a href="lab_9/geo455_lab9.html">Lab 9</a></li>
-        </ol>
+        <style>
+            .header {
+                padding: 15px;
+                border: 2px outset black;
+                background-color: white;
+                border-radius: 15px;
+                text-align: center;
+                font-family: monospace;
+                letter-spacing: 7px;
+            }
 
-        <h3>Exercises</h3>
-         <ol>
-            <li><a href="ex_1/geo455_ex1.html">Ex 1</a></li>
-            <li><a href="ex_2/geo455_ex2.html">Ex 2</a></li>
-            <li><a href="ex_3/geo455_ex3.html">Ex 3</a></li>
-            <li><a href="ex_4/geo455_ex4.html">Ex 4</a></li>
-            <li><a href="ex_5/geo455_ex5.html">Ex 5</a></li>
-            <li><a href="ex_6/geo455_ex6.html">Ex 6</a></li>
-        </ol>
+            .aboutMe {
+                padding: 15px;
+                border: 1px outset black;
+                background-color: white;
+                text-align: center;
+                font-family: monospace;               
+            }
+            
+            .aboutMeDiv {
+                width: 125px;
+                height: 100px;
+                float: right;
+            }
+   
+            .rightAboutMe {
+                position: static;
+                width: 225px;
+                float: right;
+                padding: 10px;
+                height: 750px;
+                margin: 0px;
+                padding: 10px 10px;
+                background-color: #fffcff;
+                border: 1px solid grey;
+                border-radius: 15px;
+            }
+   
+            .leftsidebar {
+                position: static;
+                width: 225px;
+                float: left;
+                padding: 10px;
+                height: 750px;
+                margin: 0px;
+                padding: 10px 10px;
+                font-size: 13px;
+                font-family: "AvantGarde", sans-serif;
+                letter-spacing: .1em;
+                background-color: #fffcff;
+                border: 1px solid grey;
+                border-radius: 15px;
+            } 
+            
+            .labExBoxes {
+                text-align: center;
+                background: #f7ebeb;
+                border-radius: 4px;
+                font-size: 12pt;
+                font-family: monospace;
+                list-style-type: none;
+                margin: 8px;
+                padding: 6px;
+            }
+            
+            .menulist {
+                margin: 10px;
+                padding: 1px;
+            }
+            
+            .main {
+                margin-left: 275px;
+                margin-right: 275px;
+                margin-top: 5px;
+                height: 750px;
+                width: relative;
+                font-size: 12pt;
+                font-family: "Courier New", monospace;
+                letter-spacing: .04em;
+                padding: 10px 20px;
+                background-color: #ffffff;
+                border: 1px solid grey;
+                border-radius:15px;
+            }
+            
+        </style>
+        
+        
+    </head>
+    <body bgcolor="#FAF3F3">
+      
+        <h1 class="header">JAMIE SCHOEN (SP 22)</h1> 
+        
+        <div class="rightAboutMe">
+    
+        <p style="font-family: monospace; font-size: 15pt; text-align: center; letter-spacing: 1px"> <b>About me!</b> </p>
+            
+        <center><img src="index_photo.jpg" width="150" height="relative" border="2px"></center>
+              
+        <p style="font-family: monospace; font-size: 12pt; text-align: center;">
+        Contact me:<br/>
+        <a href="mailto:schoen3930@uwlax.edu">schoen3930@uwlax.edu</a>
+        <br/>
+        </p>
        
+        <p style="font-family: monospace; font-size: 12pt; text-align: center;">
+        I am a junior at UWL majoring in Geography with a concentration in GIS and an Earth Science minor and I am from Paris, Wisconsin. I will be graduating in the spring of 2023. <br/> Currently, I am interning with the <a href="https://www.usgs.gov/centers/upper-midwest-environmental-sciences-center"> UMESC-USGS</a> facility in La Crosse, WI as well as with <a href="https://www.globaltreksandadventures.com/"> Global Treks and Adventures</a> in Winona, MN. 
+        </p>            
+            
+        <center><img src="hiking.jpg" width="150" height="relative" border="2px"></center>
+        
+        <p style="font-family: monospace; font-size: 10pt; text-align: center;">
+            Sunset at the end of Rams Head trail on the island of St. John, USVI.
+        </p>
+            
+        </div>
+        
+        <div class="leftsidebar">
+
+        <h3 style="font-family: monospace; font-size: 15pt; text-align: center;">
+        Lab Assignments</h3>
+         <ul class=menulist>
+             <li class="labExBoxes"><a href="lab_1/geo455_lab1.html">Lab 1</a></li>
+             <li class="labExBoxes"><a href="lab_2/geo455_lab2.html">Lab 2</a></li>
+             <li class="labExBoxes"><a href="lab_3/geo455_lab3.html">Lab 3</a></li>
+             <li class="labExBoxes"><a href="lab_4/geo455_lab4.html">Lab 4</a></li>
+             <li class="labExBoxes"><a href="lab_5/geo455_lab5.html">Lab 5</a></li>
+             <li class="labExBoxes"><a href="lab_6/geo455_lab6.html">Lab 6</a></li>
+             <li class="labExBoxes"><a href="lab_7/geo455_lab7.html">Lab 7</a></li>
+             <li class="labExBoxes"><a href="lab_8/geo455_lab8.html">Lab 8</a></li>
+             <li class="labExBoxes"><a href="lab_9/geo455_lab9.html">Lab 9</a></li>
+        </ul>
+        
+        <h3 style="font-family: monospace; font-size: 15pt; text-align: center;">Exercises</h3>
+         <ul class=menulist>
+            <li class="labExBoxes"><a href="ex_1/geo455_ex1.html">Ex 1</a></li>
+            <li class="labExBoxes"><a href="ex_2/geo455_ex2.html">Ex 2</a></li>
+            <li class="labExBoxes"><a href="ex_3/geo455_ex3.html">Ex 3</a></li>
+            <li class="labExBoxes"><a href="ex_4/geo455_ex4.html">Ex 4</a></li>
+            <li class="labExBoxes"><a href="ex_5/geo455_ex5.html">Ex 5</a></li>
+            <li class="labExBoxes"><a href="ex_6/geo455_ex6.html">Ex 6</a></li>
+        </ul>
+       </div>
+        
+        
+        <div class="main">
+        <p style="font-family: monospace; font-size: 12pt;">
+        
+        As a GIS intern with the Upper Midwest Environmental Science Center (UMESC), I get to work on a variety of GIS-related projects. I have assisted in orthorectification of aerial imagery of the Mississippi River for US Army Corps of Engineers, helped create a database with geospatial data of mussel species found in the Mississippi, and most recently, I am digitizing historic fire documents to make them easily accessible for the public.<br/><br/>
+        <center><img src="USGS_logo.png" width="300px"></center>
+        <br/><br/> <b>
+        As an intern with Global Treks and Adventures, I went on a research expedition in January of 2022 to the U.S. Virgin Islands. While on the expedition, I snorkled in order to collect data on marine life, mapped hiking trails, and I am now using the hiking trail data to create professional maps of each trail to be used in a travel guide for the island of St. John.<br/><br/> </b>
+        <center><img src="usvi.png" width="300px"></center>
+        </p>    
+        <p>
+        <center><a href="https://docs.google.com/presentation/d/1EQeaNpaA-Hz9VO6BwcRTIbXXTcVZMtg8ZKmKcjuqUWs/edit?usp=sharing"> View some of my previous work here.</a>
+        </center>
+        
+        </p>
+        </div>
+        
