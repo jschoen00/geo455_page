@@ -1,0 +1,58 @@
+<html>
+   <head>
+      <title>Ex- 6-1: DOM manipulation</title>
+      <script type = "text/javascript" 
+         src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+      </script>
+
+      <script type = "text/javascript" language = "javascript">
+         $(document).ready(function() {
+            $("p:first").css('background-color', 'yellow');
+         });
+     
+        $(document).ready(function() {
+            $("#b1").click(function(){
+                $("ul").css('color', 'red');
+            });
+        
+        });
+          
+        $(document).ready(function() {
+            $("#b2").click(function() {
+                $("body").css('background-color', 'black');
+                $("h1").css('color', 'white');
+                $("ul").css('color', 'white');
+                $("p").css('color', 'white');
+                $("p:first").css('background-color', 'black');
+            });
+        });
+            
+        $(document).ready(function() {
+            $("#b3").click(function() {
+                $("body").css('background-color', 'white');
+                $("h1").css('color', 'black');
+                $("ul").css('color', 'black');
+                $("p").css('color', 'black');
+                $("p:first").css('background-color', 'yellow');
+            });
+        });
+          
+      </script>
+   </head>
+	
+   <body>
+       <h1> Webmapping </h1>
+       <p> Technologies we learned </p>
+       <ul>
+           <li> HTML </li>
+           <li> CSS </li>
+           <li> JavaScript </li>
+           <li> jQuery </li>
+       </ul>
+       
+       <p id="test">Check console to get the text for list</p> 
+       <button id="b1">Change list text color</button>
+       <button id="b2"> Dark mode </button>
+       <button id="b3"> Light mode </button>
+    </body>
+</html>
