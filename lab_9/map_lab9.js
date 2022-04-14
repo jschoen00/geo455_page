@@ -9,6 +9,8 @@
        minZoom: 2
      }).addTo(mymap);
 
+    L.geoJSON(counties).addTo(mymap);
+
     var migrationLayer = new L.migrationLayer({
             map: mymap,
             data: data,
@@ -20,8 +22,8 @@
             maxWidth:10
             }
         );
-      migrationLayer.addTo(mymap);
 
+      migrationLayer.addTo(mymap);
 
         function hide(){
             migrationLayer.hide();
