@@ -39,11 +39,18 @@
 
 ////lulc layer... maybe
 //    var lulc = L.esri.dynamicMapLayer( {
-//       url: 'https://env1.arcgis.com/arcgis/rest/services/Sentinel2_10m_LandCover/ImageServer',
+//        url: 'https://env1.arcgis.com/arcgis/rest/services/Sentinel2_10m_LandCover/ImageServer',
 //        // server response content type can be either 'json' (default) or 'image'
 //        f: 'image'
-//      }).addTo(mymap);
-
+//      }).addTo(lulcLayer);
+//
+//    lulc.bindPopup(function (error, featureCollection) {
+//        if (error || featureCollection.features.length === 0) {
+//          return false;
+//        } else {
+//          return 'Land Cover Type: ' + featureCollection.features[0].properties.CLASS_DESC; 
+//        }
+//      });
 
 
 //river style, adding to layerGroup
