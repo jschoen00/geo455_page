@@ -38,11 +38,11 @@
     county.addTo(countyLayer);
 
 ////lulc layer... maybe
-    var lulc = L.esri.dynamicMapLayer( {
-        url: 'https://env1.arcgis.com/arcgis/rest/services/Sentinel2_10m_LandCover/ImageServer',
-        // server response content type can be either 'json' (default) or 'image'
-        f: 'image'
-      }).addTo(mymap);
+//    var lulc = L.esri.dynamicMapLayer( {
+//       url: 'https://env1.arcgis.com/arcgis/rest/services/Sentinel2_10m_LandCover/ImageServer',
+//        // server response content type can be either 'json' (default) or 'image'
+//        f: 'image'
+//      }).addTo(mymap);
 
 
 
