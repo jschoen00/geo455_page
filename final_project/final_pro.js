@@ -79,18 +79,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     var nonimpRivers = L.geoJson(nonimpairedRivers, {
         style: riverStyle, 
     }).bindPopup(function(layer){
@@ -154,13 +142,9 @@
     L.control.scale({position: 'bottomright', maxWidth: '200', metric: 'True'}).addTo(mymap);
 
 //original extent
-    L.easyButton(('<img src="globe_icon.png", height=85%>'), function(btn, map){
+    L.easyButton(('<img src="globe_icon.png", height=85%;>'), function(btn, map){
         map.setView([43.92427169016961, -91.09884770078885], 11);
         }).addTo(mymap);
-
-
-
-
 
 
 
@@ -205,3 +189,24 @@
       slides[slideIndex-1].style.display = "block";
       dots[slideIndex-1].className += " active";
     }
+
+    $(document).ready(function() {
+        $("#lgnd").click(function(){
+            $("img.leg").hide();
+        });
+        $("#showlgnd").click(function(){
+            $("img.leg").show();
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+

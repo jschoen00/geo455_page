@@ -120,19 +120,43 @@
                 min-height: 230px;
             }
             #legend {
+                text-align: center;
                 position: fixed;
                 bottom: 70px;
-                right: -40px;
+                right: -5px;
+                width: 250px;
+                padding-bottom: 30px;
+                background-color: rgba(255, 255, 255, 0);
+                z-index: 800;
+            }    
+            img {
+                width: 200px; 
+                height: relative;
+            }
+            #showLgnd {
+                text-align: center;
+                position: fixed;
+                bottom: 70px;
+                right: -5px;
                 width: 250px;
                 background-color: rgba(255, 255, 255, 0);
                 z-index: 800;
-            }            
+            }
+
+            
         </style>
     </head>
     <body>
         <h1 id="title">Impaired Water Bodies in La Crosse County, WI and their Surrounding Land Use</h1>
         <div id="map"></div>
-        <div id="legend"> <img style="width: 200px; height: relative;" src="legend.PNG"></div>
+        <div id="legend"> 
+            <button style="align=center; margin-bottom: 5px; font-family: 'Poppins', sans-serif; background-color: #ededed; border-radius: 10%" id="lgnd">Hide Legend</button>
+            <img class="leg" src="legend.PNG">
+        </div>
+        <div id="showLgnd">
+            <button style="align=center; margin-bottom: 5px; font-family: 'Poppins', sans-serif; background-color: #ededed; border-radius: 10%" id="showlgnd">Show Legend</button>
+        </div>
+        
         <div id="description">
             <div class="slides">
                 <p>As required by the Clean Water Act, states are required to report impaired water bodies. Impairments can include contamination, temperature changes, and pH abnormalities. These impairments can be dangerous for wildlife, people, and the environment as a whole.
