@@ -1,12 +1,4 @@
 //baselayers
-    var grayscale = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2NoYXVkaHVyaSIsImEiOiJjazBtcG5odG8wMDltM2JtcjdnYTgyanBnIn0.qwqjMomdrBMG36GQKXBlMw', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox/light-v9',
-        tileSize: 512,
-        zoomOffset: -1
-    });
     var streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2Nob2VuMzkzMCIsImEiOiJja3o3aG9jcXcxYW1zMnZueGV5ZDl4ZXd3In0.rtn_VaAltcpsKr0cG6Yn5A', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -15,14 +7,19 @@
         tileSize: 512,
         zoomOffset: -1
     });
-    var topo = L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+    var topo = L.tileLayer.wms('http://ows.mundialis.de/services/service?', { 
         layers: 'SRTM30-Colored-Hillshade'
     });   
-
+    var sat = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution:'Map data &copy; <a href="http://www.esri.com/">Esri</a>',
+            maxZoom: 18,
+    });
 
 //layerGroups 
-    var riverLayer = L.layerGroup();
-    var lakeLayer = L.layerGroup();
+    var impRiverLayer = L.layerGroup();
+    var impLakeLayer = L.layerGroup();
+    var nonimpRiverLayer = L.layerGroup();
+    var nonimpLakeLayer = L.layerGroup(); 
     var countyLayer = L.layerGroup();
     var lulcLayer = L.layerGroup();
 
@@ -37,78 +34,117 @@
     });
     county.addTo(countyLayer);
 
-////lulc layer... maybe
-//    var lulc = L.esri.dynamicMapLayer( {
-//        url: 'https://env1.arcgis.com/arcgis/rest/services/Sentinel2_10m_LandCover/ImageServer',
-//        // server response content type can be either 'json' (default) or 'image'
-//        f: 'image'
-//      }).addTo(lulcLayer);
-//
-//    lulc.bindPopup(function (error, featureCollection) {
-//        if (error || featureCollection.features.length === 0) {
-//          return false;
-//        } else {
-//          return 'Land Cover Type: ' + featureCollection.features[0].properties.CLASS_DESC; 
-//        }
-//      });
 
-
-//river style, adding to layerGroup
+//styles
     var riverStyle = {
         "color": "#82b0fa"
     };
-    var rivers = L.geoJson(rivers, {
-//    onEachFeature: function (feature, layer) {
-//        rivers.bindPopup('<h1>'+feature.properties.WATERBODY_+'</h1><p>name: '+feature.properties.Impairments+'</p>');
-//    },
-        style: riverStyle, 
-    });
-    rivers.bindPopup("Popup content");
-    rivers.on('mouseover', function (e) {
-        this.openPopup();
-    });
-    rivers.on('mouseout', function (e) {
-        this.closePopup();
-    });
-    rivers.addTo(riverLayer);
-
-
-//lake style, popup, adding to layerGroup
+    var impRiverStyle = {
+        "color": "#fc4c4c",
+        "weight": 2,
+    };
     var lakeStyle = { 
         "color": "#7293e0",
         "fillOpacity": 1,
     };
-    var lakes = L.geoJson(lakes, {
+    var impLakeStyle = { 
+        "color": "#fc4c4c",
+        "weight": 2,
+        "fillOpacity": 1,
+    };
+
+
+
+
+
+
+
+
+
+//rivers -- layers and popups
+    var impRivers = L.geoJson(impairedRivers, {
+        style: riverStyle, 
+    }).bindPopup(function(layer){
+        return '<p><b>River Name: </b>'+layer.feature.properties.WATERBODY_+ '</br><b>' +
+            'Impairment: </b>'+layer.feature.properties.Impairments+ '</br></p>';
+    }).on('mouseover', function(e) {
+        impairedRivers.setStyle(impRiverStyle);
+    });
+    impRivers.addTo(impRiverLayer);  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var nonimpRivers = L.geoJson(nonimpairedRivers, {
+        style: riverStyle, 
+    }).bindPopup(function(layer){
+        return '<p><b>River Name: </b>'+layer.feature.properties.ROW_NAME+ '</br><b>' +
+            'No Impairments</b></p>';
+    });
+    nonimpRivers.addTo(nonimpRiverLayer);
+
+
+//lakes -- layers and popups
+    var impLakes = L.geoJson(impairedLakes, {
         style: lakeStyle,                 
+    }).bindPopup(function(layer){
+        return '<p><b>Lake Name: </b>'+layer.feature.properties.WATERBODY_+ '</br><b>' +
+            'Impairment: </b>'+layer.feature.properties.Impairments+ '</br></p>';
     });
-    lakes.bindPopup("Popup content");
-    lakes.on('mouseover', function (e) {
-        this.openPopup();
+    impLakes.addTo(impLakeLayer);
+
+    var nonimpLakes = L.geoJson(nonimpairedLakes, {
+        style: lakeStyle,                 
+    }).bindPopup(function(layer){
+        return '<p><b>Lake Name: </b>'+layer.feature.properties.WATERBODY_+ '</br><b>' +
+            'No Impairments</b></p>';
     });
-    lakes.on('mouseout', function (e) {
-        this.closePopup();
-    });
-    lakes.addTo(lakeLayer);
+    nonimpLakes.addTo(nonimpLakeLayer);
+
+//land use layer
+    var lulc = L.esri.imageMapLayer({
+        url: 'https://env1.arcgis.com/arcgis/rest/services/Sentinel2_10m_LandCover/ImageServer',
+        opacity: 0.5,
+    }).addTo(lulcLayer);
 
 
 //Create the map variable
     var mymap = L.map('map', {
         center: [43.92427169016961, -91.09884770078885], 
         zoom: 11,
-        layers: [grayscale, countyLayer, lakeLayer, riverLayer] //add LULC layer
+        minZoom: 10,
+        layers: [topo, countyLayer, lulcLayer, impRiverLayer, nonimpRiverLayer, impLakeLayer, nonimpLakeLayer]
     });
 
 // Create options for layerControl
     var baseLayers = {
-        'Grayscale': grayscale,
+        'Hillshade': topo,
+        'Satellite': sat,
         'Streets': streets,
-        "Hillshade": topo,
+        
 	};
     var overlays = {
-        'County Border': countyLayer,
-//        'Land Use': lulcLayer,
-        'Impaired Rivers': riverLayer,
-        'Impaired Lakes': lakes,
+        'Land Use': lulcLayer,
+        'Impaired Rivers': impRiverLayer,
+        'Impaired Lakes': impLakeLayer,
+        'Non Impaired Rivers': nonimpRiverLayer,
+        'Non Impaired Lakes': nonimpLakeLayer,
     };
 
 //Create layerControl
@@ -117,6 +153,10 @@
 
     L.control.scale({position: 'bottomright', maxWidth: '200', metric: 'True'}).addTo(mymap);
 
+//original extent
+    L.easyButton(('<img src="globe_icon.png", height=85%>'), function(btn, map){
+        map.setView([43.92427169016961, -91.09884770078885], 11);
+        }).addTo(mymap);
 
 
 
@@ -124,4 +164,44 @@
 
 
 
+    // dots and arrows for info box
+    var slideIndex = 1;
+    showSlides(slideIndex);
 
+    $(document).ready(function() {
+        $("#p").click(function(){
+            minusSlides(1);
+        });
+        
+        $("#n").click(function(){
+            plusSlides(1);
+        });
+    });
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function minusSlides(n) {
+      showSlides(slideIndex -= n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("slides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+    }

@@ -2,27 +2,33 @@
 <html>
     <head>
         <title>geo455_final</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-        <script type="module" src="https://js.arcgis.com/calcite-components/1.0.0-beta.76/calcite.esm.js"></script>
-        <script nomodule="" src="https://js.arcgis.com/calcite-components/1.0.0-beta.76/calcite.js"></script>
-        <link rel="stylesheet" type="text/css"
-          href="https://js.arcgis.com/calcite-components/1.0.0-beta.76/calcite.css" />
-        <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css" />
-        <script src="https://js.arcgis.com/4.23/"></script>
+        
+        <!--   Easy Button     -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+        <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+        <script src="https://unpkg.com/esri-leaflet@3.0.4/dist/esri-leaflet.js" integrity="sha512-oUArlxr7VpoY7f/dd3ZdUL7FGOvS79nXVVQhxlg6ij4Fhdc4QID43LUFRs7abwHNJ0EYWijiN5LP2ZRR2PY4hQ==" crossorigin=""></script>
+        
+        <!-- esri leaflet -->
+        <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
+        <!--    Data    -->
         <script src='county.js'></script>
-        <script src='rivers.js'></script>
-        <script src='lakes.js'></script>
-<!-- need to clean up, lots of extras because of experimenting -->
+        <script src='impaired_rivers.js'></script>
+        <script src='impaired_lakes.js'></script>
+        <script src='nonimpaired_lakes.js'></script>
+        <script src='nonimpaired_rivers.js'></script>
         
         <style>
             body {
                 margin: 0;
                 padding: 0;
-                background-color: "whitesmoke";
+                background-color: "whitesmoke"; 
                 font-family: 'Poppins', sans-serif;
                 color: #3d3d3d;
             }
@@ -31,7 +37,7 @@
                 margin-top: 0;
                 top: 10px;
                 left: 50px;
-                font-size: 2em;
+                font-size: 1.75em;
                 font-family: 'Poppins', sans-serif;
                 letter-spacing: .04em;
                 padding: 10px 15px;
@@ -50,22 +56,118 @@
                 position: fixed;
                 bottom: 20px;
                 left: 10px;
-                width: 280px;
+                width: 320px;
+                margin-bottom: auto;
                 padding: 0px 15px;
                 background-color: rgba(255, 255, 255, 0.7);
                 border: 1px solid grey;
                 border-radius: 3px;
                 z-index: 800;
             }
-            
+            /* Next & previous buttons */
+            .previous {
+                background-color: #f1f1f1;
+                color: black;
+            }
+            .prev, .next {
+                position: absolute;
+                top: 50%;
+                border: 0px;
+                width: auto;
+                margin-left: -10px;
+                margin-right: 6px;
+                padding: 16px;
+                color: #888;
+                font-weight: bold;
+                font-size: 25px;
+                border-radius: 0 3px 3px 0;
+                padding: 0px 5px;
+                user-select: none;
+            }
+            /* Position the "next button" to the right */
+            .next {
+              position: absolute;
+              right: 0;
+              border-radius: 3px 0 0 3px;
+            }
+            p{
+                margin: 5px;
+            }
+            /* The dot/bullet/indicator container */
+            .dot-container {
+                width: 305px;
+                margin: 0px;
+                text-align: center;
+                padding: 5px;
+                background: #ddd;
+            }
+            /* The dots */
+            .dot {
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+            .active, .dot:hover {
+                background-color: #717171;
+            }
+            .slides {
+                margin-top: 20px;
+                text-align: center;
+                min-height: 230px;
+            }
+            #legend {
+                position: fixed;
+                bottom: 70px;
+                right: -40px;
+                width: 250px;
+                background-color: rgba(255, 255, 255, 0);
+                z-index: 800;
+            }            
         </style>
     </head>
     <body>
         <h1 id="title">Impaired Water Bodies in La Crosse County, WI and their Surrounding Land Use</h1>
         <div id="map"></div>
+        <div id="legend"> <img style="width: 200px; height: relative;" src="legend.PNG"></div>
         <div id="description">
-            <p style="font-size: 14pt">details about what impaired river/stream/lake is, all data from WIDNR, etc etc</p>
-            <p>Map authored by Jamie Schoen </p>
+            <div class="slides">
+                <p>As required by the Clean Water Act, states are required to report impaired water bodies. Impairments can include contamination, temperature changes, and pH abnormalities. These impairments can be dangerous for wildlife, people, and the environment as a whole.
+                </p>
+            </div>
+
+            <div class="slides">
+                <p>Land use can have heavy impact on these factors, with lower albedo surfaces being heavily associated with urban land use causing water temperatures to rise, agricultural land use increasing runoff of water contaminated with fertilizers that can cause toxic algae blooms.</p>
+            </div>
+
+            <div class="slides">
+                <p><b>Algae:</b> Excessive algae growth usually caused by nurtient imbalance
+                <br/><b>PCBs:</b> Polychlorinated biphenyls: Unsafe for consumption, shown to increase rates of many types of cancer
+                <br/><b>Degraded habitat:</b> Water body is physically damaged rather than chemically
+                <br/><b>Eutrophication:</b> Excessive amounts of nutrients in water, plant life uses up all oxygen, killing animal life
+                </p>
+            </div>    
+
+            <div class="slides">
+                <p>Map authored by Jamie Schoen, all stream, river, lake, and county boundary data from <a href="https://data-wi-dnr.opendata.arcgis.com/">DNR Open Data Portal.</a> Land Use layer from <a href="https://esri.com/">Esri.</a></p>
+                <img style="width: 125px; padding-bottom: 30px;" src="Esri_logo.png">
+                <img style="width: 125px;" src="dnr_logo.max-752x423.png">
+            </div>
+
+            <!-- Next/prev buttons -->
+            <a id="p" class="prev">&#8249;</a>
+            <a id="n" class="next">&#8250;</a>
+
+            <!-- Dots/bullets -->
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
         </div>
         <script src="final_pro.js"> </script>
     </body>
